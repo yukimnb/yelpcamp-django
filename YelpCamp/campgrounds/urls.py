@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views import DetailView, IndexView
+from .views import CreateCampground, DetailCampground, ListCampground
 
 app_name = "campgrounds"
 urlpatterns = [
-    path("", IndexView.as_view(), name="index"),
-    path("<int:id>", DetailView.as_view(), name="show"),
+    path("", ListCampground.as_view(), name="list"),
+    path("<int:id>/", DetailCampground.as_view(), name="detail"),
+    path("create/", CreateCampground.as_view(), name="create"),
 ]

@@ -4,8 +4,8 @@ from django.db import models
 class Campground(models.Model):
     title = models.CharField(max_length=100)
     price = models.PositiveIntegerField()
-    description = models.TextField()
     location = models.CharField(max_length=100)
+    description = models.TextField()
 
     class Meta:
         verbose_name_plural = "Campground"
