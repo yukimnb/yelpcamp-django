@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import CreateCampground, DetailCampground, EditCampground, ListCampground
+from .views import CreateCampground, DeleteCampground, DetailCampground, EditCampground, ListCampground
 
 app_name = "campgrounds"
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path("<int:id>/", DetailCampground.as_view(), name="detail"),
     path("create/", CreateCampground.as_view(), name="create"),
     path("<int:id>/edit/", EditCampground.as_view(), name="edit"),
+    path("<int:id>/delete/", DeleteCampground.as_view(), name="delete"),
 ]

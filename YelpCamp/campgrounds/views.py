@@ -51,3 +51,14 @@ class EditCampground(generic.UpdateView):
     def form_invalid(self, form):
         messages.error(self.request, "キャンプ場の更新に失敗しました")
         return super().form_invalid(form)
+
+
+class DeleteCampground(generic.DeleteView):
+    model = Campground
+    template_name = "delete.html"
+    pk_url_kwarg = "id"
+    success_url = reverse_lazy("campgrounds:list")
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, "キャンプ場を削除しました")
+        return super().delete(request, *args, **kwargs)
