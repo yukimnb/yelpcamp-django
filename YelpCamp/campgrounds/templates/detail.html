@@ -8,8 +8,9 @@
   <body>
     <h1>{{ campground.title }}</h1>
     <h2>{{ campground.location }}</h2>
+    <p><a href="{% url 'campgrounds:edit' campground.id %}">編集する</a></p>
     <footer>
-      <a href="{% url 'campgrounds:list' %}">戻る</a>
+      <a href="{% url 'campgrounds:list' %}">一覧に戻る</a>
     </footer>
     </ul>
   </body>

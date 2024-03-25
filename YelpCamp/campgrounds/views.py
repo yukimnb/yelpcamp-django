@@ -32,3 +32,22 @@ class CreateCampground(generic.CreateView):
     def form_invalid(self, form):
         messages.error(self.request, "キャンプ場の作成に失敗しました")
         return super().form_invalid(form)
+
+
+class EditCampground(generic.UpdateView):
+    model = Campground
+    template_name = "edit.html"
+    pk_url_kwarg = "id"
+    form_class = CreateForm
+
+    def get_success_url(self):
+        print(vars(self))
+        return reverse_lazy("campgrounds:detail", kwargs={"id": self.kwargs["id"]})
+
+    def form_valid(self, form):
+        messages.success(self.request, "キャンプ場を更新しました")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "キャンプ場の更新に失敗しました")
+        return super().form_invalid(form)

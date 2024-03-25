@@ -10,8 +10,8 @@
       {% csrf_token %} {% for field in form %}
       <div>{{ field.label_tag }} {{ field }}</div>
       {% endfor %}
-      <button>登録する</button>
+      <button>更新する</button>
     </form>
-    <a href="{% url 'campgrounds:list' %}">一覧に戻る</a>
+    <a href="{% url 'campgrounds:detail' campground.id %}">キャンセル</a>
   </body>
 </html>
