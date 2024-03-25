@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>キャンプ場詳細</title>
-  </head>
-  <body>
-    <h1>{{ campground.title }}</h1>
+{% extends "base.html" %}
+
+<!-- Avoid Prettier -->
+{% block title %}キャンプ場詳細{% endblock title %}
+
+<!-- Avoid Prettier -->
+{% block contents %}
+<h1>{{ campground.title }}</h1>
     <h2>{{ campground.location }}</h2>
     <p><a href="{% url 'campgrounds:edit' campground.id %}">編集する</a></p>
     <p><a href="{% url 'campgrounds:delete' campground.id %}">削除する</a></p>
@@ -14,5 +13,5 @@
       <a href="{% url 'campgrounds:list' %}">一覧に戻る</a>
     </footer>
     </ul>
-  </body>
-</html>
+{% endblock contents %}
+

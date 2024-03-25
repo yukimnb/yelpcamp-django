@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>キャンプ場の新規登録</title>
-  </head>
-  <body>
-    <p>{{ campground.title }}</p>
-    <p>{{ campground.location }}</p>
-    <form method="POST">
-      {% csrf_token %}
-      <button>本当に削除しますか？</button>
-    </form>
-    <a href="{% url 'campgrounds:detail' campground.id %}">キャンセル</a>
-  </body>
-</html>
+{% extends "base.html" %}
+
+<!-- Avoid Prettier -->
+{% block title %}キャンプ場の削除{% endblock title %}
+
+<!-- Avoid Prettier -->
+{% block contents %}
+<p>{{ campground.title }}</p>
+<p>{{ campground.location }}</p>
+<form method="POST">
+  {% csrf_token %}
+  <button>本当に削除しますか？</button>
+</form>
+<a href="{% url 'campgrounds:detail' campground.id %}">キャンセル</a>
+{% endblock contents %}

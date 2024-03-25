@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>キャンプ場の新規登録</title>
-  </head>
-  <body>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %} {% for field in form %}
-      <div>{{ field.label_tag }} {{ field }}</div>
-      {% endfor %}
-      <button>登録する</button>
-    </form>
-    <a href="{% url 'campgrounds:list' %}">一覧に戻る</a>
-  </body>
-</html>
+{% extends "base.html" %}
+
+<!-- Avoid Prettier -->
+{% block title %}キャンプ場の新規登録{% endblock title %}
+
+<!-- Avoid Prettier -->
+{% block contents %}
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %} {% for field in form %}
+  <div>{{ field.label_tag }} {{ field }}</div>
+  {% endfor %}
+  <button>登録する</button>
+</form>
+<a href="{% url 'campgrounds:list' %}">一覧に戻る</a>
+{% endblock contents %}
