@@ -17,6 +17,7 @@ class DetailCampground(generic.DetailView):
     template_name = "detail.html"
     context_object_name = "campground"
     pk_url_kwarg = "id"
+    print(vars(model))
 
 
 class CreateCampground(generic.CreateView):

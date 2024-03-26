@@ -6,12 +6,14 @@
 <!-- Avoid Prettier -->
 {% block contents %}
 <h1>{{ campground.title }}</h1>
-    <h2>{{ campground.location }}</h2>
-    <p><a href="{% url 'campgrounds:edit' campground.id %}">編集する</a></p>
-    <p><a href="{% url 'campgrounds:delete' campground.id %}">削除する</a></p>
-    <footer>
-      <a href="{% url 'campgrounds:list' %}">一覧に戻る</a>
-    </footer>
-    </ul>
-{% endblock contents %}
+<h2>{{ campground.location }}</h2>
+<p>{{ campground.price }}</p>
+<img src="{{ campground.image }}" alt="" />
+<p>{{ campground.description }}</p>
 
+<p><a href="{% url 'campgrounds:edit' campground.id %}">編集する</a></p>
+<p><a href="{% url 'campgrounds:delete' campground.id %}">削除する</a></p>
+<footer>
+  <a href="{% url 'campgrounds:list' %}">一覧に戻る</a>
+</footer>
+{% endblock contents %}

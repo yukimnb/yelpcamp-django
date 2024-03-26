@@ -6,6 +6,7 @@ class Campground(models.Model):
     price = models.PositiveIntegerField()
     location = models.CharField(max_length=100)
     description = models.TextField()
+    image = models.URLField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Campground"
