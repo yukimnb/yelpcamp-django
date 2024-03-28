@@ -6,10 +6,26 @@
 <!-- Avoid Prettier -->
 {% block contents %}
 <h1>キャンプ場一覧</h1>
-<a href="{% url 'campgrounds:create' %}">新規登録</a>
-<ul>
-  {% for campground in campgrounds %}
-  <li><a href="{% url 'campgrounds:detail' campground.id %}"> {{ campground.title }}</a></li>
-  {% endfor %}
-</ul>
-{% endblock contents %}
+<div>
+  <a href="{% url 'campgrounds:create' %}">新規登録</a>
+</div>
+
+{% for campground in campgrounds %}
+<div class="card mb-3">
+  <div class="row">
+    <div class="col-md-4">
+      <img src="{{ campground.image }}" alt="" class="img-fluid" />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ campground.title }}</h5>
+        <p class="card-text">{{ campground.description }}</p>
+        <p class="card-text">
+          <small class="text-muted">{{ campground.location }}</small>
+        </p>
+        <a class="btn btn-primary" href="{% url 'campgrounds:detail' campground.id %}"> {{ campground.title }}の詳細</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %} {% endblock contents %}
