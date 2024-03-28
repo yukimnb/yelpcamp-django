@@ -5,11 +5,15 @@
 
 <!-- Avoid Prettier -->
 {% block contents %}
-<p>{{ campground.title }}</p>
-<p>{{ campground.location }}</p>
-<form method="POST">
-  {% csrf_token %}
-  <button>本当に削除しますか？</button>
-</form>
-<a href="{% url 'campgrounds:detail' campground.id %}">キャンセル</a>
+<div class="text-center">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="row offset-3 col-6">
+      <button class="btn btn-danger mt-5">本当に削除しますか？</button>
+    </div>
+  </form>
+  <div class="row offset-3 col-6">
+    <a href="{% url 'campgrounds:detail' campground.id %}" class="btn btn-secondary mt-4">キャンセル</a>
+  </div>
+</div>
 {% endblock contents %}
