@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import CreateForm
 from .models import Campground
 
 
@@ -11,19 +10,21 @@ class ListCampground(generic.ListView):
     template_name = "list.html"
     context_object_name = "campgrounds"
 
+    def get_queryset(self):
+        return Campground.objects.all().order_by("id")
+
 
 class DetailCampground(generic.DetailView):
     model = Campground
     template_name = "detail.html"
     context_object_name = "campground"
     pk_url_kwarg = "id"
-    print(vars(model))
 
 
 class CreateCampground(generic.CreateView):
     model = Campground
     template_name = "create.html"
-    form_class = CreateForm
+    fields = ["title", "price", "location", "description", "image"]
     success_url = reverse_lazy("campgrounds:list")
 
     def form_valid(self, form):
@@ -39,10 +40,9 @@ class EditCampground(generic.UpdateView):
     model = Campground
     template_name = "edit.html"
     pk_url_kwarg = "id"
-    form_class = CreateForm
+    fields = ["title", "price", "location", "description", "image"]
 
     def get_success_url(self):
-        print(vars(self))
         return reverse_lazy("campgrounds:detail", kwargs={"id": self.kwargs["id"]})
 
     def form_valid(self, form):
