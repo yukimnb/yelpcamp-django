@@ -92,3 +92,15 @@ class CreateReview(generic.CreateView):
         print(form)
         messages.error(self.request, "コメントの作成に失敗しました")
         return super().form_invalid(form)
+
+
+class DeleteReview(generic.DeleteView):
+    model = Review
+    pk_url_kwarg = "review_id"
+
+    def get_success_url(self):
+        return reverse_lazy("campgrounds:detail", kwargs={"id": self.kwargs["id"]})
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, "コメントを削除しました")
+        return super().delete(request, *args, **kwargs)
