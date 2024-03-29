@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -65,9 +66,9 @@ class DeleteCampground(generic.DeleteView):
     pk_url_kwarg = "id"
     success_url = reverse_lazy("campgrounds:list")
 
-    def delete(self, request, *args, **kwargs):
+    def form_valid(self, form):
         messages.success(self.request, "キャンプ場を削除しました")
-        return super().delete(request, *args, **kwargs)
+        return super().form_valid(form)
 
 
 class CreateReview(generic.CreateView):
@@ -85,12 +86,11 @@ class CreateReview(generic.CreateView):
         return reverse_lazy("campgrounds:detail", kwargs={"id": self.kwargs["id"]})
 
     def form_valid(self, form):
-        messages.success(self.request, "コメントを作成しました")
+        messages.success(self.request, "レビューを作成しました")
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        print(form)
-        messages.error(self.request, "コメントの作成に失敗しました")
+        messages.error(self.request, "レビューの作成に失敗しました")
         return super().form_invalid(form)
 
 
@@ -101,6 +101,6 @@ class DeleteReview(generic.DeleteView):
     def get_success_url(self):
         return reverse_lazy("campgrounds:detail", kwargs={"id": self.kwargs["id"]})
 
-    def delete(self, request, *args, **kwargs):
-        messages.success(self.request, "コメントを削除しました")
-        return super().delete(request, *args, **kwargs)
+    def form_valid(self, form):
+        messages.success(self.request, "レビューを削除しました")
+        return super().form_valid(form)

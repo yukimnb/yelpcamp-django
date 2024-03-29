@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+from django.contrib.messages import constants as messages
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -70,6 +71,13 @@ TEMPLATES = [
         },
     },
 ]
+
+MESSAGE_TAGS = {
+    messages.INFO: "alert alert-info",
+    messages.SUCCESS: "alert alert-success",
+    messages.WARNING: "alert alert-warning",
+    messages.ERROR: "alert alert-danger",
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
