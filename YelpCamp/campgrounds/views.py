@@ -7,7 +7,7 @@ from .models import Campground, Review
 
 class ListCampground(generic.ListView):
     model = Campground
-    template_name = "list.html"
+    template_name = "campgrounds/list.html"
     context_object_name = "campgrounds"
 
     def get_queryset(self):
@@ -16,7 +16,7 @@ class ListCampground(generic.ListView):
 
 class DetailCampground(generic.DetailView):
     model = Campground
-    template_name = "detail.html"
+    template_name = "campgrounds/detail.html"
     context_object_name = "campground"
     pk_url_kwarg = "id"
 
@@ -28,7 +28,7 @@ class DetailCampground(generic.DetailView):
 
 class CreateCampground(generic.CreateView):
     model = Campground
-    template_name = "create.html"
+    template_name = "campgrounds/create.html"
     fields = ["title", "price", "location", "description", "image"]
     success_url = reverse_lazy("campgrounds:list")
 
@@ -43,7 +43,7 @@ class CreateCampground(generic.CreateView):
 
 class EditCampground(generic.UpdateView):
     model = Campground
-    template_name = "edit.html"
+    template_name = "campgrounds/edit.html"
     pk_url_kwarg = "id"
     fields = ["title", "price", "location", "description", "image"]
 
@@ -61,7 +61,7 @@ class EditCampground(generic.UpdateView):
 
 class DeleteCampground(generic.DeleteView):
     model = Campground
-    template_name = "delete.html"
+    template_name = "campgrounds/delete.html"
     pk_url_kwarg = "id"
     success_url = reverse_lazy("campgrounds:list")
 
@@ -72,7 +72,7 @@ class DeleteCampground(generic.DeleteView):
 
 class CreateReview(generic.CreateView):
     model = Review
-    template_name = "create_review.html"
+    template_name = "reviews/create_review.html"
     pk_url_kwarg = "id"
     fields = ["campground", "comment", "rating"]
 
