@@ -23,6 +23,7 @@
         <a class="btn btn-danger" href="{% url 'campgrounds:delete' campground.id %}">削除する</a>
       </div>
     </div>
+    <a class="btn btn-success" href="{% url 'campgrounds:create_review' campground.id %}">コメントを作成</a>
   </div>
 </div>
 

@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .models import Campground
+from .models import Campground, Review
 
 
 class ListCampground(generic.ListView):
@@ -63,3 +63,27 @@ class DeleteCampground(generic.DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, "キャンプ場を削除しました")
         return super().delete(request, *args, **kwargs)
+
+
+class CreateReview(generic.CreateView):
+    model = Review
+    template_name = "create_review.html"
+    pk_url_kwarg = "id"
+    fields = ["campground", "comment", "rating"]
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["campground"] = Campground.objects.get(id=self.kwargs["id"])
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy("campgrounds:detail", kwargs={"id": self.kwargs["id"]})
+
+    def form_valid(self, form):
+        messages.success(self.request, "コメントを作成しました")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        print(form)
+        messages.error(self.request, "コメントの作成に失敗しました")
+        return super().form_invalid(form)

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+<!-- Avoid Prettier -->
+{% block title %}レビューを作成{% endblock title %}
+
+<!-- Avoid Prettier -->
+{% block contents %}
+
+<div class="row">
+  <div class="offset-3 col-6">
+    <form method="POST" class="needs-validation" novalidate>
+      {% csrf_token %}
+      <input type="hidden" name="campground" value="{{ campground.id }}" />
+      <div class="mb-3">
+        <label class="form-label" for="rating">評価</label>
+        <input class="form-range" type="range" min="1" max="5" name="rating" id="rating" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="comment">コメント</label>
+        <textarea class="form-control" name="comment" id="comment" cols="30" rows="3" required></textarea>
+        <div class="valid-feedback">OK!</div>
+      </div>
+      <button class="btn btn-success">投稿する</button>
+    </form>
+    <a href="{% url 'campgrounds:detail' campground.id %}">詳細に戻る</a>
+  </div>
+</div>
+
+{% endblock contents %}
