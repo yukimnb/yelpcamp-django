@@ -20,6 +20,11 @@ class DetailCampground(generic.DetailView):
     context_object_name = "campground"
     pk_url_kwarg = "id"
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["reviews"] = Review.objects.filter(campground=self.kwargs["id"])
+        return context
+
 
 class CreateCampground(generic.CreateView):
     model = Campground
