@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # 以下を追加
     "campgrounds.apps.CampgroundsConfig",
+    "accounts.apps.AccountsConfig",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
 ]
 
 MIDDLEWARE = [
@@ -54,6 +58,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 TEMPLATES = [
@@ -78,6 +83,24 @@ MESSAGE_TAGS = {
     messages.WARNING: "alert alert-warning",
     messages.ERROR: "alert alert-danger",
 }
+
+# Authentication
+AUTH_USER_MODEL = "accounts.CustomUser"
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGOUT_ON_GET = True
+
+LOGIN_URL = "account_login"
+LOGIN_REDIRECT_URL = "campgrounds:list"
+LOGOUT_REDIRECT_URL = "campgrounds:list"  # TODO: 最後にindexに変更する
+
+DEFAULT_FROM_EMAIL = "yelpcamp@example.com"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

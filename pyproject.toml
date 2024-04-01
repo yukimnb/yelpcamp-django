@@ -11,6 +11,8 @@ django = "4.2.11"
 python-dotenv = "^1.0.1"
 psycopg = {extras = ["binary"], version = "^3.1.18"}
 requests = "^2.31.0"
+django-debug-toolbar = "^4.3.0"
+django-allauth = "^0.61.1"
 
 
 [build-system]

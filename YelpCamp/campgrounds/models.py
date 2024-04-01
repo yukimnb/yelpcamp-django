@@ -9,7 +9,7 @@ class Campground(models.Model):
     image = models.URLField(null=True, blank=True, verbose_name="画像URL")
 
     class Meta:
-        verbose_name_plural = "Campground"
+        db_table = "campground"
 
     def __str__(self):
         return self.title
@@ -21,4 +21,4 @@ class Review(models.Model):
     rating = models.CharField(verbose_name="レーティング", max_length=10)
 
     class Meta:
-        verbose_name_plural = "Review"
+        db_table = "review"
