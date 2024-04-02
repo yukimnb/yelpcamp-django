@@ -1,14 +1,13 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">YelpCamp</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation">
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -19,10 +18,10 @@
       </div>
       <div class="navbar-nav ms-auto">
         {% if user.is_authenticated %}
-        <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
+          <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
         {% else %}
-        <a class="nav-link" href="{% url 'account_login' %}">ログイン</a>
-        <a class="nav-link" href="{% url 'account_signup' %}">ユーザー登録</a>
+          <a class="nav-link" href="{% url 'account_login' %}">ログイン</a>
+          <a class="nav-link" href="{% url 'account_signup' %}">ユーザー登録</a>
         {% endif %}
       </div>
     </div>

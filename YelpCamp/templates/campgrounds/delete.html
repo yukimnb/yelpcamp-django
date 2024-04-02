@@ -1,19 +1,18 @@
 {% extends "layouts/base.html" %}
-
-<!-- Avoid Prettier -->
-{% block title %}キャンプ場の削除{% endblock title %}
-
-<!-- Avoid Prettier -->
+{% block title %}
+  キャンプ場の削除
+{% endblock title %}
 {% block contents %}
-<div class="text-center">
-  <form method="POST">
-    {% csrf_token %}
+  <div class="text-center">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="row offset-3 col-6">
+        <button class="btn btn-danger mt-5">本当に削除しますか？</button>
+      </div>
+    </form>
     <div class="row offset-3 col-6">
-      <button class="btn btn-danger mt-5">本当に削除しますか？</button>
+      <a href="{% url 'campgrounds:detail' campground.id %}"
+         class="btn btn-secondary mt-4">キャンセル</a>
     </div>
-  </form>
-  <div class="row offset-3 col-6">
-    <a href="{% url 'campgrounds:detail' campground.id %}" class="btn btn-secondary mt-4">キャンセル</a>
   </div>
-</div>
 {% endblock contents %}
