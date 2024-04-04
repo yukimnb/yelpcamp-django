@@ -1,5 +1,6 @@
 from accounts.models import CustomUser
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -31,7 +32,7 @@ class DetailCampground(generic.DetailView):
         return context
 
 
-class CreateCampground(generic.CreateView):
+class CreateCampground(LoginRequiredMixin, generic.CreateView):
     model = Campground
     template_name = "campgrounds/create.html"
     fields = ["title", "price", "location", "description", "image", "author"]
@@ -46,7 +47,7 @@ class CreateCampground(generic.CreateView):
         return super().form_invalid(form)
 
 
-class EditCampground(generic.UpdateView):
+class EditCampground(LoginRequiredMixin, generic.UpdateView):
     model = Campground
     template_name = "campgrounds/edit.html"
     pk_url_kwarg = "id"
@@ -64,7 +65,7 @@ class EditCampground(generic.UpdateView):
         return super().form_invalid(form)
 
 
-class DeleteCampground(generic.DeleteView):
+class DeleteCampground(LoginRequiredMixin, generic.DeleteView):
     model = Campground
     template_name = "campgrounds/delete.html"
     pk_url_kwarg = "id"
@@ -75,7 +76,7 @@ class DeleteCampground(generic.DeleteView):
         return super().form_valid(form)
 
 
-class CreateReview(generic.CreateView):
+class CreateReview(LoginRequiredMixin, generic.CreateView):
     model = Review
     template_name = "reviews/create_review.html"
     pk_url_kwarg = "id"
@@ -98,7 +99,7 @@ class CreateReview(generic.CreateView):
         return super().form_invalid(form)
 
 
-class DeleteReview(generic.DeleteView):
+class DeleteReview(LoginRequiredMixin, generic.DeleteView):
     model = Review
     pk_url_kwarg = "review_id"
 
