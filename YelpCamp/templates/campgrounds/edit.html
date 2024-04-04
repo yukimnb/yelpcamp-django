@@ -37,7 +37,7 @@
                  type="text"
                  name="image"
                  id="image"
-                 value="{{ campground.image }}" />
+                 value="{{ campground.image | default_if_none:"" }}" />
           <div class="valid-feedback">OK!</div>
         </div>
         <div class="mb-3">
