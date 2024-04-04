@@ -1,44 +1,47 @@
 {% extends "layouts/base.html" %}
-
-<!-- Avoid Prettier -->
-{% block title %}キャンプ場詳細{% endblock title %}
-
-<!-- Avoid Prettier -->
+{% block title %}
+  キャンプ場詳細
+{% endblock title %}
 {% block contents %}
-
-<div class="row">
-  <div class="col-6">
-    <div class="card mb-3">
-      <img src="{{ campground.image }}" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">{{ campground.title }}</h5>
-        <p class="card-text">{{ campground.description }}</p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item text-muted">{{ campground.location }}</li>
-        <li class="list-group-item">&yen; {{ campground.price }} / 泊</li>
-      </ul>
-      <div class="card-body">
-        <a class="btn btn-info" href="{% url 'campgrounds:edit' campground.id %}">編集する</a>
-        <a class="btn btn-danger" href="{% url 'campgrounds:delete' campground.id %}">削除する</a>
-        <a class="btn btn-success" href="{% url 'campgrounds:create_review' campground.id %}">レビューを作成</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-6">
-    {% for review in reviews %}
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">評価 : {{ review.rating }}</h5>
-        <p class="card-text">コメント : {{ review.comment }}</p>
-        <form action="{% url 'campgrounds:delete_review' id=campground.id review_id=review.id %}" method="POST">
-          {% csrf_token %}
-          <button class="btn btn-sm btn-danger">削除する</button>
-        </form>
+  <div class="row">
+    <div class="col-6">
+      <div class="card mb-3">
+        <img src="{{ campground.image }}" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{ campground.title }}</h5>
+          <p class="card-text">{{ campground.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-muted">{{ campground.location }}</li>
+          <li class="list-group-item">登録者：{{ author.username }}</li>
+          <li class="list-group-item">&yen; {{ campground.price }} / 泊</li>
+        </ul>
+        <div class="card-body">
+          <a class="btn btn-info"
+             href="{% url 'campgrounds:edit' campground.id %}">編集する</a>
+          <a class="btn btn-danger"
+             href="{% url 'campgrounds:delete' campground.id %}">削除する</a>
+          <a class="btn btn-success"
+             href="{% url 'campgrounds:create_review' campground.id %}">レビューを作成</a>
+        </div>
       </div>
     </div>
-    {% endfor %}
+    {% if reviews %}
+      <div class="col-6">
+        {% for review in reviews %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">評価 : {{ review.rating }}</h5>
+              <p class="card-text">コメント : {{ review.comment }}</p>
+              <form action="{% url 'campgrounds:delete_review' id=campground.id review_id=review.id %}"
+                    method="POST">
+                {% csrf_token %}
+                <button class="btn btn-sm btn-danger">削除する</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
-</div>
-
 {% endblock contents %}

@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 django.setup()
 load_dotenv()
 
+from accounts.models import CustomUser
 from campgrounds.models import Campground
 from cities import cities
 from seedhelpers import descriptors, places
@@ -35,7 +36,8 @@ def get_images():
 Campground.objects.all().delete()
 # レコード作成
 records = []
-for _ in range(50):
+sample_author = CustomUser.objects.get(username="yuki")
+for _ in range(20):
     city = choice(cities)
     new_record = Campground(
         title=f"{choice(descriptors)}・{choice(places)}",
@@ -44,11 +46,12 @@ for _ in range(50):
         description="\n".join(
             [
                 "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
-                "Provident illo, culpa similique ratione, exercitationem nam veritatis nostrum magnam soluta laborum aut rerum ea maiores sunt.",
+                "Provident illo, culpa similique ratione, exercitationem nam veritatis nostrum magnam soluta laborum aut rerum ea maiores sunt.",  # noqa
                 "Debitis ex consectetur commodi cupiditate!",
             ]
         ),
         image=get_images(),
+        author=sample_author,
     )
     records.append(new_record)
 Campground.objects.bulk_create(records)

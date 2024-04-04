@@ -11,6 +11,7 @@
             class="needs-validation"
             novalidate>
         {% csrf_token %}
+        <input type="hidden" name="author" value="{{ user.id }}" />
         <div class="mb-3">
           <label class="form-label" for="title">タイトル</label>
           <input class="form-control" type="text" name="title" id="title" required />

@@ -1,3 +1,4 @@
+from accounts.models import CustomUser
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import generic
@@ -22,14 +23,18 @@ class DetailCampground(generic.DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context["reviews"] = Review.objects.filter(campground=self.kwargs["id"])
+        if Review.objects.filter(campground=self.kwargs["id"]).exists():
+            context["reviews"] = Review.objects.filter(campground=self.kwargs["id"])
+        else:
+            context["reviews"] = None
+        context["author"] = CustomUser.objects.get(id=Campground.objects.get(id=self.kwargs["id"]).author_id)
         return context
 
 
 class CreateCampground(generic.CreateView):
     model = Campground
     template_name = "campgrounds/create.html"
-    fields = ["title", "price", "location", "description", "image"]
+    fields = ["title", "price", "location", "description", "image", "author"]
     success_url = reverse_lazy("campgrounds:list")
 
     def form_valid(self, form):
