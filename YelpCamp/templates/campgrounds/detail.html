@@ -38,13 +38,16 @@
           {% for review in reviews %}
             <div class="card mb-3">
               <div class="card-body">
+                <p class="card-subtitle mb-2 fw-bold">{{ review.reviewer.username }}</p>
                 <h5 class="card-title">評価 : {{ review.rating }}</h5>
                 <p class="card-text">コメント : {{ review.comment }}</p>
-                <form action="{% url 'campgrounds:delete_review' id=campground.id review_id=review.id %}"
-                      method="POST">
-                  {% csrf_token %}
-                  <button class="btn btn-sm btn-danger">削除する</button>
-                </form>
+                {% if user.id == review.reviewer_id %}
+                  <form action="{% url 'campgrounds:delete_review' id=campground.id review_id=review.id %}"
+                        method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-sm btn-danger">削除する</button>
+                  </form>
+                {% endif %}
               </div>
             </div>
           {% endfor %}

@@ -18,9 +18,10 @@ class Campground(models.Model):
 
 
 class Review(models.Model):
-    campground = models.ForeignKey(Campground, on_delete=models.CASCADE, verbose_name="キャンプ場")
     comment = models.TextField(verbose_name="コメント")
     rating = models.CharField(verbose_name="レーティング", max_length=10)
+    campground = models.ForeignKey(Campground, on_delete=models.CASCADE, verbose_name="キャンプ場")
+    reviewer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="投稿者")
 
     class Meta:
         db_table = "review"

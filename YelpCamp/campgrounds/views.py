@@ -25,7 +25,7 @@ class DetailCampground(generic.DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         if Review.objects.filter(campground=self.kwargs["id"]).exists():
-            context["reviews"] = Review.objects.filter(campground=self.kwargs["id"])
+            context["reviews"] = Review.objects.select_related("reviewer").filter(campground=self.kwargs["id"])
         else:
             context["reviews"] = None
         context["author"] = CustomUser.objects.get(id=Campground.objects.get(id=self.kwargs["id"]).author_id)
@@ -80,7 +80,7 @@ class CreateReview(LoginRequiredMixin, generic.CreateView):
     model = Review
     template_name = "reviews/create_review.html"
     pk_url_kwarg = "id"
-    fields = ["campground", "comment", "rating"]
+    fields = ["comment", "rating", "campground", "reviewer"]
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
