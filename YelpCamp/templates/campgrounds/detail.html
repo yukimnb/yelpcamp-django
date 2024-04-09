@@ -38,8 +38,9 @@
           {% for review in reviews %}
             <div class="card mb-3">
               <div class="card-body">
-                <p class="card-subtitle mb-2 fw-bold">{{ review.reviewer.username }}</p>
-                <h5 class="card-title">評価 : {{ review.rating }}</h5>
+                <h5 class="card-subtitle mb-2">{{ review.reviewer.username }}</h5>
+                <p class="card-title starability-result"
+                   data-rating="{{ review.rating }}">Rated: {{ review.rating }} stars</p>
                 <p class="card-text">コメント : {{ review.comment }}</p>
                 {% if user.id == review.reviewer_id %}
                   <form action="{% url 'campgrounds:delete_review' id=campground.id review_id=review.id %}"
