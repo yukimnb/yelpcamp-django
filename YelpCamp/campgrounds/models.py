@@ -7,7 +7,9 @@ class Campground(models.Model):
     price = models.PositiveIntegerField(verbose_name="価格")
     location = models.CharField(max_length=100, verbose_name="場所")
     description = models.TextField(verbose_name="説明")
-    image = models.URLField(null=True, blank=True, verbose_name="画像URL")
+    image1 = models.ImageField(verbose_name="画像1")
+    image2 = models.ImageField(null=True, blank=True, verbose_name="画像2")
+    image3 = models.ImageField(null=True, blank=True, verbose_name="画像3")
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="登録者")
 
     class Meta:
