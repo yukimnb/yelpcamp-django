@@ -6,6 +6,7 @@ class Campground(models.Model):
     title = models.CharField(max_length=100, verbose_name="タイトル")
     price = models.PositiveIntegerField(verbose_name="価格")
     location = models.CharField(max_length=100, verbose_name="場所")
+    geometry = models.JSONField(verbose_name="geometry")
     description = models.TextField(verbose_name="説明")
     image1 = models.ImageField(verbose_name="画像1")
     image2 = models.ImageField(null=True, blank=True, verbose_name="画像2")

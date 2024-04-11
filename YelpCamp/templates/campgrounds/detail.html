@@ -1,91 +1,95 @@
 {% extends "layouts/base.html" %}
+{% load static %}
 {% block title %}
   キャンプ場詳細
 {% endblock title %}
 {% block contents %}
   <div class="row">
-    {% if reviews %}
-      <div class="col-6">
-      {% else %}
-        <div class="offset-2 col-8">
-        {% endif %}
-        <div id="campgroundCarousel" class="carousel slide">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="{{ campground.image1.url }}" class="d-block w-100" alt="" />
-            </div>
-            {% if campground.image2 %}
-              <div class="carousel-item">
-                <img src="{{ campground.image2.url }}" class="d-block w-100" alt="" />
-              </div>
-            {% endif %}
-            {% if campground.image3 %}
-              <div class="carousel-item">
-                <img src="{{ campground.image3.url }}" class="d-block w-100" alt="" />
-              </div>
-            {% endif %}
+    <div class="col-7">
+      <div id="campgroundCarousel" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{ campground.image1.url }}" class="d-block w-100" alt="" />
           </div>
-          {% if campground.image2 or campground.image3 %}
-            <button class="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#campgroundCarousel"
-                    data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next"
-                    type="button"
-                    data-bs-target="#campgroundCarousel"
-                    data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+          {% if campground.image2 %}
+            <div class="carousel-item">
+              <img src="{{ campground.image2.url }}" class="d-block w-100" alt="" />
+            </div>
+          {% endif %}
+          {% if campground.image3 %}
+            <div class="carousel-item">
+              <img src="{{ campground.image3.url }}" class="d-block w-100" alt="" />
+            </div>
           {% endif %}
         </div>
-        <div class="card mb-3">
-          <div class="card-body">
-            <h5 class="card-title">{{ campground.title }}</h5>
-            <p class="card-text">{{ campground.description }}</p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item text-muted">{{ campground.location }}</li>
-            <li class="list-group-item">登録者：{{ author.username }}</li>
-            <li class="list-group-item">&yen; {{ campground.price }} / 泊</li>
-          </ul>
-          <div class="card-body">
-            {% if user.username == author.username %}
-              <a class="btn btn-info"
-                 href="{% url 'campgrounds:edit' campground.id %}">編集する</a>
-              <a class="btn btn-danger"
-                 href="{% url 'campgrounds:delete' campground.id %}">削除する</a>
-            {% endif %}
-            <a class="btn btn-success"
-               href="{% url 'campgrounds:create_review' campground.id %}">レビューを作成</a>
-          </div>
+        {% if campground.image2 or campground.image3 %}
+          <button class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#campgroundCarousel"
+                  data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#campgroundCarousel"
+                  data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        {% endif %}
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ campground.title }}</h5>
+          <p class="card-text">{{ campground.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-muted">{{ campground.location }}</li>
+          <li class="list-group-item">登録者：{{ author.username }}</li>
+          <li class="list-group-item">&yen; {{ campground.price }} / 泊</li>
+        </ul>
+        <div class="card-body">
+          {% if user.username == author.username %}
+            <a class="btn btn-info"
+               href="{% url 'campgrounds:edit' campground.id %}">編集する</a>
+            <a class="btn btn-danger"
+               href="{% url 'campgrounds:delete' campground.id %}">削除する</a>
+          {% endif %}
+          <a class="btn btn-success"
+             href="{% url 'campgrounds:create_review' campground.id %}">レビューを作成</a>
         </div>
       </div>
-      {% if reviews %}
-        <div class="col-6">
-          <h3 class="mb-3">レビュー</h3>
-          {% for review in reviews %}
-            <div class="card mb-3">
-              <div class="card-body">
-                <h5 class="card-subtitle mb-2">{{ review.reviewer.username }}</h5>
-                <p class="card-title starability-result"
-                   data-rating="{{ review.rating }}">Rated: {{ review.rating }} stars</p>
-                <p class="card-text">コメント : {{ review.comment }}</p>
-                {% if user.id == review.reviewer_id %}
-                  <form action="{% url 'campgrounds:delete_review' id=campground.id review_id=review.id %}"
-                        method="POST">
-                    {% csrf_token %}
-                    <button class="btn btn-sm btn-danger">削除する</button>
-                  </form>
-                {% endif %}
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
     </div>
+    <div class="col-5">
+      <div id='map' style='width: 400px; height: 300px;'></div>
+      {% if reviews %}
+        <h3 class="mb-3">レビュー</h3>
+        {% for review in reviews %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-subtitle mb-2">{{ review.reviewer.username }}</h5>
+              <p class="card-title starability-result"
+                 data-rating="{{ review.rating }}">Rated: {{ review.rating }} stars</p>
+              <p class="card-text">コメント : {{ review.comment }}</p>
+              {% if user.id == review.reviewer_id %}
+                <form action="{% url 'campgrounds:delete_review' id=campground.id review_id=review.id %}"
+                      method="POST">
+                  {% csrf_token %}
+                  <button class="btn btn-sm btn-danger">削除する</button>
+                </form>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
+</div>
+<script>
+  const mapboxToken = "{{ mapbox_token }}";
+  const place = "{{ campground.location }}";
+  const geometry = {{ campground.geometry|safe }};
+</script>
+<script src="{% static 'js/mapbox.js' %}"></script>
 {% endblock contents %}

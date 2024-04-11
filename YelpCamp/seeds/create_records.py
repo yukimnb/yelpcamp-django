@@ -21,6 +21,7 @@ from YelpCamp.settings import MEDIA_ROOT
 def main():
     # 全レコード削除
     Campground.objects.all().delete()
+
     # レコード作成
     records = []
     sample_author = CustomUser.objects.get(username="yuki")
@@ -31,6 +32,7 @@ def main():
             title=f"{choice(descriptors)}・{choice(places)}",
             price=choice(range(3000, 5001, 100)),
             location=city["prefecture"] + city["city"],
+            geometry={"type": "Point", "coordinates": [city["longitude"], city["latitude"]]},
             description="\n".join(
                 [
                     "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",

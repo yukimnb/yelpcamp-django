@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
+from utils.mapbox_api import get_forward_geocoding
 
 from .models import Campground, Review
 
@@ -39,6 +40,9 @@ class CreateCampground(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("campgrounds:list")
 
     def form_valid(self, form):
+        campground = form.save(commit=False)
+        campground.geometry = get_forward_geocoding(campground.location)
+        campground.save()
         messages.success(self.request, "キャンプ場を作成しました")
         return super().form_valid(form)
 
