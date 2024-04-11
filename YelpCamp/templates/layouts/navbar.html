@@ -1,7 +1,7 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">YelpCamp</a>
-    <button class="navbar-toggler"
+    <button class="navbar-toggler ms-auto"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNavAltMarkup"
@@ -25,5 +25,6 @@
         {% endif %}
       </div>
     </div>
+    <span class="badge rounded-pill text-bg-warning ms-2">{{ user.username }}</span>
   </div>
 </nav>
