@@ -35,7 +35,7 @@ class DetailCampground(generic.DetailView):
 class CreateCampground(LoginRequiredMixin, generic.CreateView):
     model = Campground
     template_name = "campgrounds/create.html"
-    fields = ["title", "price", "location", "description", "image", "author"]
+    fields = ["title", "price", "location", "description", "image1", "image2", "image3", "author"]
     success_url = reverse_lazy("campgrounds:list")
 
     def form_valid(self, form):
@@ -51,7 +51,7 @@ class EditCampground(LoginRequiredMixin, generic.UpdateView):
     model = Campground
     template_name = "campgrounds/edit.html"
     pk_url_kwarg = "id"
-    fields = ["title", "price", "location", "description", "image"]
+    fields = ["title", "price", "location", "description", "image1", "image2", "image3"]
 
     def get_success_url(self):
         return reverse_lazy("campgrounds:detail", kwargs={"id": self.kwargs["id"]})

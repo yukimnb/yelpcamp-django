@@ -27,11 +27,6 @@
           <div class="valid-feedback">OK!</div>
         </div>
         <div class="mb-3">
-          <label class="form-label" for="image">画像URL</label>
-          <input class="form-control" type="text" name="image" id="image" />
-          <div class="valid-feedback">OK!</div>
-        </div>
-        <div class="mb-3">
           <label class="form-label" for="price">価格</label>
           <div class="input-group">
             <span class="input-group-text" id="price-label">&yen;</span>
@@ -50,6 +45,32 @@
           <label class="form-label" for="description">説明</label>
           <textarea class="form-control" name="description" id="description" required></textarea>
           <div class="valid-feedback">OK!</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="image1">画像1</label>
+          <input class="form-control"
+                 type="file"
+                 name="image1"
+                 id="image1"
+                 accept="image/*"
+                 required />
+          <div class="invalid-feedback">キャンプ場の登録には1枚以上の画像が必要です</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="image2">画像2</label>
+          <input class="form-control"
+                 type="file"
+                 name="image2"
+                 id="image2"
+                 accept="image/*" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="image3">画像3</label>
+          <input class="form-control"
+                 type="file"
+                 name="image3"
+                 id="image3"
+                 accept="image/*" />
         </div>
         <div class="mb-3">
           <button class="btn btn-success">登録する</button>
