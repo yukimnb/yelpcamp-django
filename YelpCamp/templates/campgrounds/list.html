@@ -1,12 +1,11 @@
 {% extends "layouts/base.html" %}
+{% load static %}
 {% block title %}
   キャンプ場一覧
 {% endblock title %}
 {% block contents %}
+  <div id='map' class="mb-3" style='width: 100%; height: 500px;'></div>
   <h1>キャンプ場一覧</h1>
-  <div>
-    <a href="{% url 'campgrounds:create' %}">新規登録</a>
-  </div>
   {% for campground in campgrounds %}
     <div class="card mb-3">
       <div class="row">
@@ -28,3 +27,10 @@
     </div>
   {% endfor %}
 {% endblock contents %}
+{% block scripts %}
+  <script>
+  const mapboxToken = "{{ mapbox_token }}";
+  const campgroundsJson = {{ campgrounds_json|safe }};
+  </script>
+  <script src="{% static 'js/clusterMap.js' %}"></script>
+{% endblock scripts %}

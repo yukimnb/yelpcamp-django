@@ -12,9 +12,20 @@ class ListCampground(generic.ListView):
     model = Campground
     template_name = "campgrounds/list.html"
     context_object_name = "campgrounds"
+    campgrounds = Campground.objects.all().order_by("id")
 
     def get_queryset(self):
-        return Campground.objects.all().order_by("id")
+        return self.campgrounds
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["campgrounds_json"] = []
+        for campground in list(self.campgrounds.values()):
+            campground["properties"] = {
+                "title": campground["title"],
+            }
+            context["campgrounds_json"].append(campground)
+        return context
 
 
 class DetailCampground(generic.DetailView):

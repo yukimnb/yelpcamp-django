@@ -85,11 +85,12 @@
       </div>
     {% endif %}
   </div>
-</div>
-<script>
+{% endblock contents %}
+{% block scripts %}
+  <script>
   const mapboxToken = "{{ mapbox_token }}";
   const place = "{{ campground.location }}";
   const geometry = {{ campground.geometry|safe }};
-</script>
-<script src="{% static 'js/mapbox.js' %}"></script>
-{% endblock contents %}
+  </script>
+  <script src="{% static 'js/mapbox.js' %}"></script>
+{% endblock scripts %}
