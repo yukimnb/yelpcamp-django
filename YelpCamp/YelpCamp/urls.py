@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from campgrounds.views import Index
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
@@ -23,6 +24,7 @@ from . import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", Index.as_view(), name="index"),
     path("campgrounds/", include("campgrounds.urls")),
     path("accounts/", include("allauth.urls")),
 ]

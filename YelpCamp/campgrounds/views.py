@@ -8,6 +8,10 @@ from utils.mapbox_api import get_forward_geocoding
 from .models import Campground, Review
 
 
+class Index(generic.TemplateView):
+    template_name = "campgrounds/index.html"
+
+
 class ListCampground(generic.ListView):
     model = Campground
     template_name = "campgrounds/list.html"

@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">YelpCamp</a>
+    <a class="navbar-brand" href="{% url "index" %}">YelpCamp</a>
     <button class="navbar-toggler ms-auto"
             type="button"
             data-bs-toggle="collapse"
@@ -12,7 +12,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="/">ホーム</a>
         <a class="nav-link" href="{% url 'campgrounds:list' %}">キャンプ場一覧</a>
         <a class="nav-link" href="{% url 'campgrounds:create' %}">キャンプ場作成</a>
       </div>
