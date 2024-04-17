@@ -8,15 +8,16 @@ body {
 }
 
 .cover-container {
-  max-width: 60vw;
+  max-width: 80vw;
 }
 
 .nav-link {
   padding: 0.25rem 0;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.5);
-  margin-left: 1rem;
+  margin: 0 0.5rem;
   border-bottom: 0.25rem solid transparent;
+  text-align: center;
 }
 
 .nav-link:hover {

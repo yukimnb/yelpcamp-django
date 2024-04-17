@@ -5,7 +5,7 @@
 {% endblock title %}
 {% block contents %}
   <div class="row">
-    <div class="col-7">
+    <div class="col-md-7">
       <div id="campgroundCarousel" class="carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -61,10 +61,10 @@
         </div>
       </div>
     </div>
-    <div class="col-5">
-      <div id='map' style='width: 400px; height: 300px;'></div>
+    <div class="col-md-5">
+      <div id="map"></div>
       {% if reviews %}
-        <h3 class="mb-3">レビュー</h3>
+        <h3 class="mt-4 mb-2">レビュー</h3>
         {% for review in reviews %}
           <div class="card mb-3">
             <div class="card-body">
