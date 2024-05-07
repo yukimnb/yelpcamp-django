@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # 以下を追加
     "campgrounds.apps.CampgroundsConfig",
     "accounts.apps.AccountsConfig",
+    "api.apps.ApiConfig",
+    "rest_framework",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
