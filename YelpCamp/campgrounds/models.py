@@ -8,9 +8,9 @@ class Campground(models.Model):
     location = models.CharField(max_length=100, verbose_name="場所")
     geometry = models.JSONField(verbose_name="geometry")
     description = models.TextField(verbose_name="説明")
-    image1 = models.ImageField(verbose_name="画像1")
-    image2 = models.ImageField(null=True, blank=True, verbose_name="画像2")
-    image3 = models.ImageField(null=True, blank=True, verbose_name="画像3")
+    image1 = models.ImageField(verbose_name="画像1", max_length=150)
+    image2 = models.ImageField(null=True, blank=True, verbose_name="画像2", max_length=150)
+    image3 = models.ImageField(null=True, blank=True, verbose_name="画像3", max_length=150)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="登録者")
 
     class Meta:
