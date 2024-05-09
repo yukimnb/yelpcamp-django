@@ -83,7 +83,7 @@ def get_unsplash_images():
 
 def save_images(content):
     try:
-        file_name = extract_word(content["alternative_slugs"]["ja"])
+        file_name = extract_word(content["alternative_slugs"]["en"])
     except AttributeError:
         return False
     file_path = settings.MEDIA_ROOT / file_name
@@ -97,7 +97,7 @@ def save_images(content):
 
 
 def extract_word(word):
-    match_obj = re.match(r"(\S+?)-", word)
+    match_obj = re.match(r"(\S+)-", word)
     return match_obj.group(1) + ".jpg"
 
 
