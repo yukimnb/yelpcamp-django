@@ -6,7 +6,8 @@ from rest_framework import serializers
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ["username", "email"]
+        fields = ["username", "email", "password"]
+        extra_kwargs = {"password": {"write_only": True}}
 
 
 class CampgroundSerializer(serializers.ModelSerializer):
@@ -26,3 +27,9 @@ class CampgroundSerializer(serializers.ModelSerializer):
             "author",
             "author_name",
         ]
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ["id", "username", "email"]
