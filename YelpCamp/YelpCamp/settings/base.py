@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     "campgrounds.apps.CampgroundsConfig",
     "accounts.apps.AccountsConfig",
     "api.apps.ApiConfig",
-    "rest_framework",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "rest_framework",
+    "rest_framework.authtoken",
+    "dj_rest_auth",
     "django_cleanup",
 ]
 
@@ -87,8 +89,10 @@ MESSAGE_TAGS = {
 # Authentication
 AUTH_USER_MODEL = "accounts.CustomUser"
 AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
+    # allauth用（メールアドレス認証）
     "allauth.account.auth_backends.AuthenticationBackend",
+    # 管理サイト用（ユーザー名認証）
+    "django.contrib.auth.backends.ModelBackend",
 ]
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = True
@@ -98,9 +102,13 @@ ACCOUNT_LOGOUT_ON_GET = True
 
 LOGIN_URL = "account_login"
 LOGIN_REDIRECT_URL = "campgrounds:list"
-LOGOUT_REDIRECT_URL = "campgrounds:list"  # TODO: 最後にindexに変更する
+LOGOUT_REDIRECT_URL = "index"
 
-DEFAULT_FROM_EMAIL = "yelpcamp@example.com"
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

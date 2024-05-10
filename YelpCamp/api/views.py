@@ -1,6 +1,6 @@
-from accounts.models import CustomUser
 from campgrounds.models import Campground
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 from .serializers import CampgroundSerializer, CustomUserSerializer
 
@@ -10,6 +10,7 @@ class CampgroundListCreateAPIView(generics.ListCreateAPIView):
 
     queryset = Campground.objects.all()
     serializer_class = CampgroundSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class CampgroundRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -17,6 +18,7 @@ class CampgroundRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIVi
 
     queryset = Campground.objects.all()
     serializer_class = CampgroundSerializer
+    permission_classes = [IsAuthenticated]
     lookup_field = "id"
 
 
@@ -24,10 +26,3 @@ class CustomUserCreateAPIView(generics.CreateAPIView):
     """ユーザーの登録APIクラス"""
 
     serializer_class = CustomUserSerializer
-
-
-class CustomUserDestroyAPIView(generics.DestroyAPIView):
-    """ユーザーの削除APIクラス"""
-
-    queryset = CustomUser.objects.all()
-    lookup_field = "id"
