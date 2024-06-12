@@ -24,6 +24,7 @@ class CampgroundSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campground
         fields = [
+            "id",
             "title",
             "price",
             "location",
