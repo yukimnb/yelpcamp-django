@@ -1,4 +1,3 @@
-console.log(mapboxToken);
 mapboxgl.accessToken = mapboxToken;
 const map = new mapboxgl.Map({
   container: "map", // container ID
@@ -6,7 +5,6 @@ const map = new mapboxgl.Map({
   center: geometry.coordinates, // starting position [lng, lat]
   zoom: 9, // starting zoom
 });
-const popup = new mapboxgl.Popup({ offset: 25 }).setText("Construction on the Washington Monument began in 1848.");
 
 new mapboxgl.Marker({ color: "red" })
   .setLngLat(geometry.coordinates)

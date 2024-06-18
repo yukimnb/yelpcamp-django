@@ -32,7 +32,7 @@ map.on("load", () => {
       //   * Blue, 20px circles when point count is less than 100
       //   * Yellow, 30px circles when point count is between 100 and 750
       //   * Pink, 40px circles when point count is greater than or equal to 750
-      "circle-color": ["step", ["get", "point_count"], "#f1f075", 10, "#51bbd6", 20, "#f28cb1"],
+      "circle-color": ["step", ["get", "point_count"], "#f1f075", 5, "#51bbd6", 10, "#f28cb1"],
       "circle-radius": ["step", ["get", "point_count"], 15, 10, 20, 20, 25],
     },
   });
@@ -55,10 +55,10 @@ map.on("load", () => {
     source: "campgrounds",
     filter: ["!", ["has", "point_count"]],
     paint: {
-      "circle-color": "#11b4da",
-      "circle-radius": 4,
-      "circle-stroke-width": 1,
-      "circle-stroke-color": "#fff",
+      "circle-color": "brown",
+      "circle-radius": 6,
+      // "circle-stroke-width": 1,
+      // "circle-stroke-color": "#fff",
     },
   });
 
@@ -86,7 +86,6 @@ map.on("load", () => {
     const coordinates = e.features[0].geometry.coordinates.slice();
     const { id } = e.features[0];
     const { title } = e.features[0].properties;
-    console.log(e.features[0]);
 
     // Ensure that if the map is zoomed out such that
     // multiple copies of the feature are visible, the

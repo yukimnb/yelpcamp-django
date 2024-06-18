@@ -13,7 +13,10 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" href="{% url 'campgrounds:list' %}">キャンプ場一覧</a>
-        <a class="nav-link" href="{% url 'campgrounds:create' %}">キャンプ場作成</a>
+        {% if user.is_authenticated %}
+          <a class="nav-link" href="{% url 'campgrounds:create' %}">キャンプ場作成</a>
+        {% endif %}
+
       </div>
       <div class="navbar-nav ms-auto">
         {% if user.is_authenticated %}
