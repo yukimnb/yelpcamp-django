@@ -110,6 +110,10 @@ REST_FRAMEWORK = {
     ],
 }
 
+REST_AUTH_SERIALIZERS = {
+    "LOGIN_SERIALIZER": "api.serializers.CustomLoginSerializer",
+}
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
