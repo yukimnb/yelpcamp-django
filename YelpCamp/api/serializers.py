@@ -1,6 +1,13 @@
-from accounts.models import CustomUser
-from campgrounds.models import Campground
+from campgrounds.models import Campground, Review
 from rest_framework import serializers
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    reviewer_name = serializers.ReadOnlyField(source="reviewer.username")
+
+    class Meta:
+        model = Review
+        fields = ["id", "comment", "rating", "campground", "reviewer", "reviewer_name"]
 
 
 class CampgroundSerializer(serializers.ModelSerializer):
@@ -21,9 +28,3 @@ class CampgroundSerializer(serializers.ModelSerializer):
             "author",
             "author_name",
         ]
-
-
-class ReviewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = ["id", "username", "email"]
