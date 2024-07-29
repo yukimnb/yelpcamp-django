@@ -5,6 +5,8 @@ from .base import *
 DEBUG = True
 ALLOWED_HOSTS = []
 
+MEDIA_ROOT = BASE_DIR / "media"
+
 # ロギング設定
 LOGGING = {
     "version": 1,
@@ -46,22 +48,17 @@ LOGGING = {
 }
 
 
-INSTALLED_APPS += ["debug_toolbar", "corsheaders"]
-MIDDLEWARE.insert(0, "corsheaders.middleware.CorsMiddleware")
-MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
-
-
 # django-debug-toolbar設定
 def show_toobar(request):
     return True
 
 
+INSTALLED_APPS += ["debug_toolbar"]
+MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": show_toobar,
 }
 
 # CORS設定
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
