@@ -56,4 +56,4 @@ LOGGING = {
 
 # CORS設定
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ALLOWED_ORIGINS = ["https://yelpcamp-react.vercel.app/"]
+CORS_ALLOWED_ORIGINS = ["https://yelpcamp-react.vercel.app"]
