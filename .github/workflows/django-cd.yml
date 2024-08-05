@@ -26,7 +26,7 @@ jobs:
         ssh-keyscan $SERVER >> ~/.ssh/known_hosts
 
     - name: Deploy to Server
-      if: github.ref == "refs/heads/main"
+      if: github.ref == 'refs/heads/main'
       env:
         USER: ${{ secrets.USER }}
         SERVER: ${{ secrets.SERVER }}
