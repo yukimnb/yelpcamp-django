@@ -1,0 +1,35 @@
+name: Django CD
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:  # ジョブ名
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v4
+      with:
+        ref: main 
+
+    - name: Setup SSH
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SERVER: ${{ secrets.SERVER }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa.pem
+        chmod 600  ~/.ssh/id_rsa.pem
+        ssh-keyscan $SERVER >> ~/.ssh/known_hosts
+
+    - name: Deploy to Server
+      if: github.ref == "refs/heads/main"
+      env:
+        USER: ${{ secrets.USER }}
+        SERVER: ${{ secrets.SERVER }}
+      run: |
+        ssh -i ~/.ssh/id_rsa.pem $USER@$SERVER "bash /home/ec2-user/app/deploy.sh"
+        
