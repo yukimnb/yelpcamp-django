@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "yelpcamp-ver2"
+name = "yelpcamp-django"
 version = "0.1.0"
 description = ""
 authors = ["yuki manabe"]
@@ -19,6 +19,7 @@ django-cleanup = "^8.1.0"
 djangorestframework = "^3.15.1"
 dj-rest-auth = "^6.0.0"
 django-cors-headers = "^4.3.1"
+gunicorn = "^22.0.0"
 
 
 [build-system]
