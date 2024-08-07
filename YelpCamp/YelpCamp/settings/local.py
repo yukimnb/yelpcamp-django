@@ -1,5 +1,7 @@
 """開発環境用の設定ファイル"""
 
+from django.conf import settings
+
 from .base import *
 
 DEBUG = True
@@ -49,14 +51,11 @@ LOGGING = {
 
 
 # django-debug-toolbar設定
-def show_toobar(request):
-    return True
-
-
 INSTALLED_APPS += ["debug_toolbar"]
-MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
+MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK": show_toobar,
+    "SHOW_TOOLBAR_CALLBACK": lambda request: settings.DEBUG,
+    "IS_RUNNING_TESTS": False,
 }
 
 # CORS設定

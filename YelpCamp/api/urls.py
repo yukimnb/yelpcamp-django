@@ -14,7 +14,7 @@ urlpatterns = [
     path("campgrounds/<id>/", CampgroundRetrieveUpdateDestroyAPIView.as_view()),
     path("campgrounds/<id>/reviews/", ReviewListCreateAPIView.as_view()),
     path("reviews/<id>/", ReviewDestroyAPIView.as_view()),
-    path("accounts/login/", CustomLoginView.as_view()),
+    path("accounts/login/", CustomLoginView.as_view(), name="login"),
     path("accounts/signup/", include("dj_rest_auth.registration.urls")),
     path("accounts/", include("dj_rest_auth.urls")),
 ]
