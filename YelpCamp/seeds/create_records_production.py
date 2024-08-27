@@ -5,14 +5,17 @@ from pathlib import Path
 from random import choice
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "YelpCamp.settings.production")
 
 import django
 import requests
+from dotenv import load_dotenv
 
+load_dotenv()
 django.setup()
 
 from accounts.models import CustomUser
-from campgrounds.models import Campground
+from campgrounds.models import Campground, Review
 from cities import cities
 from django.conf import settings
 from seedhelpers import descriptors, places
@@ -65,6 +68,47 @@ def main():
         )
         records.append(new_record)
     Campground.objects.bulk_create(records)
+    print("キャンプ場を作成しました")
+
+    # レビュー作成
+    friends = CustomUser.objects.filter(username__in=["hiroki", "keiji", "akira", "kohei", "yuki"])
+
+    records = []
+    for campground in Campground.objects.all():
+        for friend in friends:
+            records.append(
+                Review(
+                    rating=choice(["3", "4", "5"]),
+                    comment=choice(
+                        [
+                            "素晴らしい自然に囲まれて、心身ともにリフレッシュできました！",
+                            "夜空の星がとても綺麗で、忘れられない思い出になりました。",
+                            "設備が整っていて快適なキャンプ体験ができました！",
+                            "スタッフの皆さんが親切で、安心して過ごせました。",
+                            "焚き火を囲んで語り合う時間が最高でした。",
+                            "子供たちも大満足！家族でまた来たいと思います。",
+                            "美しい湖の景色が本当に素晴らしかったです。",
+                            "自然の中でのんびりと過ごす時間が最高の贅沢です。",
+                            "トイレも清潔で、女性でも安心して利用できました。",
+                            "次回もぜひここでキャンプしたいと思います！",
+                            "キャンプ場の雰囲気が最高で、癒される時間を過ごせました。",
+                            "大自然の中で過ごす時間が、心に響きました。",
+                            "設備が充実していて、快適なキャンプを楽しめました。",
+                            "山の風景が美しく、まるで絵画のようでした。",
+                            "夜の静寂が心地よく、ぐっすり眠れました。",
+                            "バーベキューがとても美味しく、家族みんなが大満足でした。",
+                            "スタッフの対応が素晴らしく、安心して過ごせました。",
+                            "ハイキングコースが充実していて、自然を満喫できました。",
+                            "清潔感があり、女性や子供にも優しいキャンプ場でした。",
+                            "風の音と鳥のさえずりに癒される贅沢な時間でした。",
+                        ]
+                    ),
+                    campground=campground,
+                    reviewer=friend,
+                )
+            )
+    Review.objects.bulk_create(records)
+    print("レビューを作成しました")
 
 
 def get_unsplash_images():
